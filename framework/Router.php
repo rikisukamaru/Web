@@ -40,30 +40,30 @@ class Router {
     // если маршрут не найден, то будет использоваться контроллер по умолчанию
     public function get_or_default($default_controller) {
         $url = $_SERVER["REQUEST_URI"]; // получили url
-
+        $path = parse_url($url, PHP_URL_PATH); // вытаскиваем адрес
+        
         // фиксируем в контроллер $default_controller
         $controller = $default_controller;
         // проходим по списку $routes 
         $matches = [];
         foreach($this->routes as $route) {
             // проверяем подходит ли маршрут под шаблон
-            if (preg_match($route->route_regexp, $url,$matches)) {
+            if (preg_match($route->route_regexp, $path,$matches)) {
                 // если подходит, то фиксируем привязанные к шаблону контроллер 
                 $controller = $route->controller;
-               // и выходим из цикла
+             
                 break;
             }
         }
         $controllerInstance = new $controller();
         $controllerInstance->setPDO($this->pdo);
         $controllerInstance->setParams($matches);
-        // проверяем не является ли controllerInstance наследником TwigBaseController
-        // и если является, то передает в него twig
+       
         if ($controllerInstance instanceof TwigBaseController) {
             $controllerInstance->setTwig($this->twig);
         }
 
         // вызываем
-        return $controllerInstance->get();
+        return $controllerInstance->process_response();
     }
 }

@@ -1,0 +1,46 @@
+{% extends "__layout.twig" %}
+
+{% block content %}
+    <h1>Добавление нового персонажа Dota 2</h1>
+    <hr>
+    {% if message %}
+    <div class="alert alert-info">
+        {{message}}
+        <a href="hero/{{id}}">Открыть новый объект</a>
+    </div>
+    {% endif %}
+    <form action="" enctype="multipart/form-data" method="POST" class="row g-3">
+        <div class="col-4">
+            <label class="form-label">Дайте ему название</label>
+            <input type="text" class="form-control" name="hero_name"value="{{dota_hero.hero_name}}">
+        </div>
+        <div class="col-4">
+            <label class="form-label">История/лор персонажа</label>
+            <input type="text" class="form-control" name="description" value="{{dota_hero.description}}">
+        </div>
+        
+        <div class="col-4">
+            <label class="form-label">Атрибут</label>
+            <select class="form-control" name="attributes" >
+                {% for attribute in attributes %}
+                <option value="{{attribute.id}}"{% if attribute.id == dota_hero.atr_id %}selected{% endif %}>{{attribute.attribute}}
+                    
+                </option>
+                {% endfor %}
+
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="formFile" class="form-label">Картинка</label>
+            <input class="form-control" type="file" name="image">
+          </div>
+        <div class="col-12">
+            <textarea name="characters" placeholder="Характеристики персонажа" class="form-control" rows="5">{{dota_hero.characters}}</textarea>
+        </div>
+        
+        <div class="col-12 text-end">
+            <button type="submit" class="btn btn-primary">Добавить</button>
+        </div>
+    </form>
+
+{% endblock %}

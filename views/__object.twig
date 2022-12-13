@@ -1,21 +1,17 @@
 {% extends "__layout.twig" %}
 
 {% block content %}
-<h1>{{title}}</h1>
+{% from "button.twig" import btn %}
+<h1>{{hero_name}}</h1>
 <ul class="nav nav-pills">
     <li class="nav-item">
-        <a class="nav-link {{ is_image ? 'active'}}" href="/{{url_title}}/image">
-            Картинка
-        </a>
-
+        {{ btn("Картинка", "#{dota_hero.id}?show=image", not is_image ? "light") }}
     </li>
     <li class="nav-item">
-        <a class="nav-link {{ is_info ? 'active'}}" href="/{{url_title}}/info">
-            Описание
-        </a>
-
+        {{btn("История", "#{dota_hero.id}?show=description", not is_description ? "light")}}
     </li>
 </ul>
+
 <div class="container">
     {% block objectContent %}{% endblock %}
 </div>

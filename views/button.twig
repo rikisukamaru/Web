@@ -1,0 +1,4 @@
+
+{% macro btn(label, url, style, useless_variable = true) %}
+    <a href="{{ url }}" class="btn mx-2 btn-{{ style|default('primary') }} {{ not useless_variable ? 'btn-link' }}">{{ label }}</a>
+{% endmacro %}

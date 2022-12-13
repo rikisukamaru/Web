@@ -1,22 +1,31 @@
 {% extends "__layout.twig" %}
-
+{% from "button.twig" import btn %}
 {% block content %}
-<div class="container">
+<div class="container fluid d-flex">
     <div class="d-flex">
         {% for object in dota_hero %}
-        <div class="p-2">
+        <div class="p-2 m-2 d-flex flex-column position-relative">
             <h1>{{object.hero_name}}</h1>
+            <div class="position-absolute" style="right: 4px;top:4px">
+                    <form action="/hero/delete" method="POST">
+                        <input type="hidden" name="id" value="{{object.id}}">
+                        <button type = "submit" class="btn btn-danger">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </form>
+                    <form action="/hero/edit" method="POST">
+                        <input type="hidden" name="id" value="{{object.id}}">
+                        <button type = "submit" class="btn btn-info">
+                            <i class="fas fa-pen"></i>
+                        </button>
+                    </form>
+            </div>
             <img class="icon" src="{{object.image_hero}}" alt="картинка не грузится">
-            <ul class="nav nav-pills">
-                <li class="nav-item">
-                    <a class="nav-link {{ is_image ? 'active'}}" href="">
-                        Картинка
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ is_info ? 'active'}}" href="">
-                        Описание
-                    </a>
+            
+            <ul class="nav nav-pills m-2 d-flex flex-column">
+                <li class="nav-item mt-2 d-flex justify-content-evenly">
+                    {{ btn("Картинка", "hero/#{object.id}?show=image", "light") }}
+                    {{ btn("История", "hero/#{object.id}?show=description", "light") }}
                 </li>
             </ul>
         </div>
@@ -25,8 +34,8 @@
 </div>
 <style>
 .icon {
- width: 200px;
- height: 125px;
+ width: 250px;
+ height: 150px;
  border-radius: 10%;
 }
 </style>

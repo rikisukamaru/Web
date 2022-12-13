@@ -1,0 +1,33 @@
+{% extends "__layout.twig" %}
+
+
+{% block content %}
+    <h1>Поиск</h1>
+
+    <form class="row g-3 mb-3" action="">
+        <div class="col">
+            <label class="form-label" >Атрибут Героя</label>
+            <select class="form-select" name="attributes">
+                {% for attribute in attributes %}
+                <option value="{{ attribute.id}}">{{  attribute.attribute|title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col">
+            <label class="form-label" >Имя Героя</label>
+            <input class="form-control" type="attributes" name="hero_name" autocomplete="off" value={{ hero_name }} >
+        </div>
+        
+        <div class="col mt-5">
+            <button class="btn btn-primary" type="submit">Найти</button>
+            <br>
+        </div>
+        <h2>Результаты поиска:</h2>
+            {% for obj in objects %}
+            
+            <a href="/hero/{{obj.id}}" class="{{obj.hero_name}} ? 'active' : ''">{{obj.hero_name}} </a>
+            {% endfor %}
+    </form>
+    
+{% endblock %}

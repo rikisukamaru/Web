@@ -1,21 +1,25 @@
 <?php
 
-//require_once "TwigBaseController.php";
+require_once "../controllers/BaseHeroController.php";
 
-class MainController extends TwigBaseController {
+class MainController extends BaseHeroController {
     public $template = "main.twig";
     public $title = "Главная";
     public function getContext(): array
     {
         $context = parent::getContext();
+        if (isset($_GET['attributes']))
+        {
+            $query = $this->pdo->prepare("SELECT * FROM dota_hero WHERE atr_id = :attributes");
+            $query->bindValue("attributes", $_GET['attributes']);
+            $query->execute();
+        }
+        else
+        {
+            $query = $this->pdo->query("SELECT * FROM dota_hero");
+        }
         
-        // подготавливаем запрос SELECT * FROM space_objects
-        // вообще звездочку не рекомендуется использовать, но на первый раз пойдет
-        $query = $this->pdo->query("SELECT * FROM dota_hero");
-        
-        // стягиваем данные через fetchAll() и сохраняем результат в контекст
         $context['dota_hero'] = $query->fetchAll();
-
         return $context;
     }
 }
