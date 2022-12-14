@@ -2,6 +2,12 @@
 
 {% block content %}
 {% from "button.twig" import btn %}
+Сообщение из сессии: {{my_session_message}}
+<br>
+Последнее сообщение: <br>
+{% for m in messages %}
+    {{m}} <br>
+{% endfor %}
 <h1>{{hero_name}}</h1>
 <ul class="nav nav-pills">
     <li class="nav-item">

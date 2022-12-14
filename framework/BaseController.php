@@ -15,6 +15,7 @@ abstract class BaseController {
         return[];
     }
     public function process_response() {
+       
         $method = $_SERVER['REQUEST_METHOD'];
         $context = $this->getContext(); // вызываю context тут
         if ($method == 'GET') {

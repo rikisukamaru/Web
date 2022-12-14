@@ -18,9 +18,9 @@ class ObjectController extends BaseHeroController {
         $context['hero_name'] = $data['hero_name'];
         $context['id'] = $data['id'];
         $context['image_hero'] = $data['image_hero'];
-    
-    
-    
+        
+        $context["my_session_message"] = isset($_SESSION['welcome_message']) ? $_SESSION['welcome_message'] : "";
+        $context["messages"] = isset($_SESSION['messages']) ? $_SESSION['messages'] : "";
     return $context;
     }
 
@@ -39,6 +39,7 @@ public function get(array $context)
             $context['is_description'] = true;
         }
     }
+
     parent::get($context);
 }
 }

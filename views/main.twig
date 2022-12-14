@@ -13,12 +13,10 @@
                             <i class="fas fa-times"></i>
                         </button>
                     </form>
-                    <form action="/hero/edit" method="POST">
-                        <input type="hidden" name="id" value="{{object.id}}">
-                        <button type = "submit" class="btn btn-info">
-                            <i class="fas fa-pen"></i>
-                        </button>
-                    </form>
+                   
+                        <a class="btn brn-pen" href="/hero/{{object.id}}/edit" </a>
+                   
+                    
             </div>
             <img class="icon" src="{{object.image_hero}}" alt="картинка не грузится">
             
