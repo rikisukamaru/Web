@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/bootstrap.min.css">
+    <link rel="stylesheet" href="https://outer.tealeaf.su/assets/3rdparty/all.min.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
@@ -38,9 +39,28 @@
           <form action="/set-welcome/">
             <input type="text" name="message" class="form-controll mr-2 ml-2">
           </form>
+
+          {% if is_logged == true %}
+          <form action="/logout" method="POST">
+              <button type="submit" class="btn btn-danger p-2">Выход</button>
+          </form>
+          {% else %}
+          <form action="/login" method="GET">
+              <button type="submit" class="btn btn-success p-2">Вход</button>
+          </form>
+          {% endif %}
         </div>
       </nav>
-    
+      <div class="container">
+        <br>
+        Последние посещение：<br>
+        {% for m in  last_path %}
+            {{m}}<br>
+        {% endfor %}
+        <hr>
+        
+    </div>
+  
     {% block content %}
       
     {% endblock %}

@@ -14,8 +14,10 @@ require_once "../controllers/HeroCreateController.php";
 require_once "../controllers/HeroDeleteController.php";
 require_once "../controllers/HeroUpdateController.php";
 require_once "../controllers/SetWelcomeController.php";
-//$controller = new HeroRestController();
-//$controller->process();
+require_once '../controllers/LoginController.php';
+require_once '../controllers/LogoutController.php';
+
+
 $pdo = new PDO("mysql:host=localhost;dbname=dota_2;charset=utf8", "root", "");
 $loader = new \Twig\Loader\FilesystemLoader('../views');
 
@@ -30,7 +32,7 @@ $router = new Router($twig, $pdo);
 
 $router->add("/hero/delete", HeroDeleteController::class)
 ->middleware(new LoginRequiredMiddeware());
-$router->add("/set-welcome/", SetWelcomeController::class);
+//$router->add("/set-welcome/", SetWelcomeController::class);
 $router->add("/hero/(?P<id>\d+)/edit", HeroUpdateController::class)
 ->middleware(new LoginRequiredMiddeware());
 $router->add("/search", SearchController::class)
@@ -41,7 +43,8 @@ $router->add("/", MainController::class)
 ->middleware(new LoginRequiredMiddeware());
 $router->add("/hero/(?P<id>\d+)", ObjectController::class)
 ->middleware(new LoginRequiredMiddeware()); 
-
+$router->add("/login", LoginController::class);
+$router->add("/logout", LogoutController::class);
 $router->get_or_default(Controller404::class);
 
 

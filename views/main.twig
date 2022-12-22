@@ -9,15 +9,17 @@
             <div class="position-absolute" style="right: 4px;top:4px">
                     <form action="/hero/delete" method="POST">
                         <input type="hidden" name="id" value="{{object.id}}">
-                        <button type = "submit" class="btn btn-danger">
-                            <i class="fas fa-times"></i>
+                        <button type = "submit" class="btn btn-primary">
+                            <i class="fas fa-pen"></i>
                         </button>
                     </form>
-                   
-                        <a class="btn brn-pen" href="/hero/{{object.id}}/edit" </a>
-                   
-                    
+                    <form action="/hero/{{object.id}}/edit">
+                        <button type = "submit" class="btn btn-danger">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </form>                   
             </div>
+            
             <img class="icon" src="{{object.image_hero}}" alt="картинка не грузится">
             
             <ul class="nav nav-pills m-2 d-flex flex-column">

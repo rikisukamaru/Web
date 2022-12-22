@@ -5,6 +5,7 @@ require_once "BaseController.php";
 class TwigBaseController extends BaseController{
     public $title = "";
     public $template = "";
+    
     protected $twig;
     public function setTwig($twig) {
         $this->twig = $twig;
@@ -13,7 +14,7 @@ class TwigBaseController extends BaseController{
     {
         $context = parent::getContext(); 
         $context['title'] = $this->title; 
-
+        //$context['last_path'] = $_SESSION['last_path'];
 
         return $context;
     }

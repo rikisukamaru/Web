@@ -2,16 +2,13 @@
 
 class SetWelcomeController extends BaseController{
     public function get(array $context)
-    { $_SESSION['welcome_message'] = $_GET['message'];
-        if(!isset($_SESSION['messages'])){
-            $_SESSION['messages'] = [];
-        }
-        array_push($_SESSION['messages'],$_GET['message']);
-
-          
-        
-        $url  = $_SERVER['HTTP_REFERER'];
-        header("Location: $url");
-        exit;
+    {
+    if(!isset($_SESSION['last_path'])){
+        $_SESSION['last_path'] = [];
+    }
+    array_push($_SESSION['last_path'], $_SERVER['REQUEST_URI']);
+    $url = $_SERVER['HTTP_REFERER'];
+    header("Location: $url");
+    exit;
     }
 }
